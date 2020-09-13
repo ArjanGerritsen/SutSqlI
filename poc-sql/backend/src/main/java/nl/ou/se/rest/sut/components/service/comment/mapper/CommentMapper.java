@@ -1,24 +1,22 @@
 package nl.ou.se.rest.sut.components.service.comment.mapper;
 
-import java.util.List;
+import org.springframework.beans.BeanUtils;
 
 import nl.ou.se.rest.sut.components.data.comment.domain.Comment;
 import nl.ou.se.rest.sut.components.service.comment.domain.CommentDto;
 
 public class CommentMapper {
 
-    public static Object toDtos(List<Comment> comments) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public static Object toDto(Comment comment) {
-        // TODO Auto-generated method stub
-        return null;
+    // method(s)
+    public static CommentDto toDto(Comment comment) {
+        CommentDto dto = new CommentDto();
+        BeanUtils.copyProperties(comment, dto);
+        return dto;
     }
 
     public static Comment toDomain(CommentDto commentDto) {
-        // TODO Auto-generated method stub
-        return null;
+        Comment comment = new Comment();
+        BeanUtils.copyProperties(commentDto, comment);
+        return comment;
     }
 }

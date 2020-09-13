@@ -25,7 +25,7 @@ public class SpringFoxConfig {
 
     ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("SUT - proof of concept - SQL injection")
-                .description("This SUT is a REST web service containt SQL injection vulnerabilities")
+                .description("This SUT is a REST web service containing SQL injection vulnerabilities.")
                 .license("Apache 2.0").licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .termsOfServiceUrl("").version("1.0.0").contact(new Contact("", "", "develop@arjangerritsen.nl")).build();
     }

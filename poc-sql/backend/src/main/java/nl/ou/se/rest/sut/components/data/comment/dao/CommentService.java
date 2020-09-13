@@ -1,43 +1,37 @@
 package nl.ou.se.rest.sut.components.data.comment.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import javax.sql.DataSource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import nl.ou.se.rest.sut.components.data.comment.domain.Comment;
 
-@Component
+@Service
 public class CommentService {
 
-    // variables
+    // variable(s)
+    @Autowired
     private JdbcTemplate jdbcTemplate;
-    
-    public CommentService(DataSource dataSource) {
-        jdbcTemplate = new JdbcTemplate(dataSource);
+
+    public Comment create(Comment comment) {
+        jdbcTemplate.execute("INSERT INTO comments (description) values ('"+ comment.getDescription() +"');");
+        Long id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID();", Long.class);
+        comment.setId(id);
+
+        return comment;
     }
 
-    public List<Comment> findAll() {
-        return new ArrayList<Comment>();
-        // TODO return jdbcTemplate.queryForObject("SELECT * FROM comments;", new Object[] { id }, new CommentMapper());
+    public Comment read(Long id) {
+        Comment comment = jdbcTemplate.queryForObject("SELECT * FROM COMMENT WHERE ID = " + id + ";", Comment.class);
+        return comment;
     }
 
-    public Optional<Comment> findById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+    public Comment update(Comment comment) {
+        jdbcTemplate.execute("UPDATE comments SET description = '"+ comment.getDescription() +"' WHERE id = " + comment.getId() +";");
+        return comment;
     }
 
-    public Comment save(Comment comment) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public void deleteById(Long id) {
-        // TODO Auto-generated method stub
-        
+    public void delete(Long id) {
+        jdbcTemplate.execute("DELETE FROM comments WHERE id = " + id +";");
     }
 }
