@@ -45,8 +45,8 @@ public class CommentController {
         return ResponseEntity.ok(CommentMapper.toDto(comment));
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public @ResponseBody ResponseEntity<?> update(@RequestParam Long id, @RequestParam String description) {
+    @RequestMapping(path = "{id}", method = RequestMethod.PUT)
+    public @ResponseBody ResponseEntity<?> update(@PathVariable(name = "id") Long id, @RequestParam String description) {
         CommentDto dto = new CommentDto();
         dto.setId(id);
         dto.setDescription(description);
