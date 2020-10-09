@@ -1,0 +1,6 @@
+# No maven target folder(s)
+/target/*
+*/target/*
+
+# No Apple junk
+.DS_Store
